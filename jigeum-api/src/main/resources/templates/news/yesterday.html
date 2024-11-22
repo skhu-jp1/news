@@ -215,109 +215,110 @@
                 </div>
             </div>
         </div>
-      <!-- 예시
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 news-card">
-                <썸네일>
-                <img src="https://via.placeholder.com/300x200"
-                     class="news-thumbnail"
-                     alt="뉴스 썸네일">
+        <!-- 예시
+          <div class="col-md-6 col-lg-4">
+              <div class="card h-100 news-card">
+                  <썸네일>
+                  <img src="https://via.placeholder.com/300x200"
+                       class="news-thumbnail"
+                       alt="뉴스 썸네일">
 
-                <div class="card-body">
-                    <제목>
-                    <h5 class="card-title mb-2">
-                        <a href="https://example.com/news-detail"
-                           class="text-decoration-none text-dark"
-                           target="_blank">
-                            [예시 뉴스 제목] AI가 예측한 정치인 동향
-                        </a>
-                    </h5>
+                  <div class="card-body">
+                      <제목>
+                      <h5 class="card-title mb-2">
+                          <a href="https://example.com/news-detail"
+                             class="text-decoration-none text-dark"
+                             target="_blank">
+                              [예시 뉴스 제목] AI가 예측한 정치인 동향
+                          </a>
+                      </h5>
 
-                    <발행일>
-                    <p class="published-date mb-3">
-                        2024-11-22 10:00
-                    </p>
+                      <발행일>
+                      <p class="published-date mb-3">
+                          2024-11-22 10:00
+                      </p>
 
-                    <div class="card-body-content">
-                    <AI 요약 섹션>
-                    <div class="ai-summary">
-                        <div class="icon-label">
-                            <i class="bi bi-cpu text-success"></i>
-                            <span>AI 뉴스 요약</span>
-                        </div>
-                        <p class="content-preview">
-                            이 뉴스는 최근 발표된 AI 정책과 관련되어 정치적 논란을 불러일으켰으며, 다양한 의견이 제시되고 있습니다.
-                        </p>
-                    </div>
+                      <div class="card-body-content">
+                      <AI 요약 섹션>
+                      <div class="ai-summary">
+                          <div class="icon-label">
+                              <i class="bi bi-cpu text-success"></i>
+                              <span>AI 뉴스 요약</span>
+                          </div>
+                          <p class="content-preview">
+                              이 뉴스는 최근 발표된 AI 정책과 관련되어 정치적 논란을 불러일으켰으며, 다양한 의견이 제시되고 있습니다.
+                          </p>
+                      </div>
 
-                    <정치인 동향 예측 섹션>
-                    <div class="politician-prediction">
-                        <div class="icon-label">
-                            <i class="bi bi-graph-up text-primary"></i>
-                            <span>정치인 동향 예측</span>
-                        </div>
-                        <p class="content-preview">
-                            해당 정책에 따라 정치권 내 분열이 심화될 가능성이 있으며, 주요 정치인의 발언이 향후 논의의 핵심이 될 것으로 예상됩니다.
-                        </p>
-                    </div>
-                    </div>
-                </div>
+                      <정치인 동향 예측 섹션>
+                      <div class="politician-prediction">
+                          <div class="icon-label">
+                              <i class="bi bi-graph-up text-primary"></i>
+                              <span>정치인 동향 예측</span>
+                          </div>
+                          <p class="content-preview">
+                              해당 정책에 따라 정치권 내 분열이 심화될 가능성이 있으며, 주요 정치인의 발언이 향후 논의의 핵심이 될 것으로 예상됩니다.
+                          </p>
+                      </div>
+                      </div>
+                  </div>
 
-                <푸터 섹션>
-                <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-center">
-                    <small class="text-muted">
-                        <i class="bi bi-clock"></i>
-                        10:00
-                    </small>
-                    <a href="https://example.com/news-detail"
-                       class="btn btn-outline-primary btn-sm"
-                       target="_blank">
-                        원문 보기 <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div> -->
+                  <푸터 섹션>
+                  <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-center">
+                      <small class="text-muted">
+                          <i class="bi bi-clock"></i>
+                          10:00
+                      </small>
+                      <a href="https://example.com/news-detail"
+                         class="btn btn-outline-primary btn-sm"
+                         target="_blank">
+                          원문 보기 <i class="bi bi-arrow-right"></i>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div> -->
 
+    </div>
 </div>
 
-<!-- Bootstrap Icons -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
 
-        const toggleAllBtn = document.getElementById("toggleAll");
-        const cards = document.querySelectorAll(".news-card");
-        let allExpanded = false;
+            const toggleAllBtn = document.getElementById("toggleAll");
+            const cards = document.querySelectorAll(".news-card");
+            let allExpanded = false;
 
-        // "전체 보기" 버튼 클릭 이벤트
-        toggleAllBtn.addEventListener("click", function () {
-            allExpanded = !allExpanded;
+            // "전체 보기" 버튼 클릭 이벤트
+            toggleAllBtn.addEventListener("click", function () {
+                allExpanded = !allExpanded;
+                cards.forEach((card) => {
+                    if (allExpanded) {
+                        card.classList.add("expanded");
+                    } else {
+                        card.classList.remove("expanded");
+                    }
+                });
+                toggleAllBtn.textContent = allExpanded ? "축소하기" : "전체 보기";
+            });
+
+            // 카드 클릭 이벤트 (옵션)
             cards.forEach((card) => {
-                if (allExpanded) {
-                    card.classList.add("expanded");
-                } else {
-                    card.classList.remove("expanded");
-                }
+                card.addEventListener("click", function () {
+                    card.classList.toggle("expanded");
+                });
             });
-            toggleAllBtn.textContent = allExpanded ? "축소하기" : "전체 보기";
+
+
+
         });
+    </script>
 
-        // 카드 클릭 이벤트 (옵션)
-        cards.forEach((card) => {
-            card.addEventListener("click", function () {
-                card.classList.toggle("expanded");
-            });
-        });
-
-
-
-    });
-</script>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

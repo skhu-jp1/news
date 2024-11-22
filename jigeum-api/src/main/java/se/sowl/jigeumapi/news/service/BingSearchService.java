@@ -35,9 +35,9 @@ public class BingSearchService {
         }
 
         return newsItems.stream()
-            .map(BingSearchResponse::new)
-            .filter(this::hasThumbnail)
-            .collect(Collectors.toList());
+                .map(BingSearchResponse::new)
+                .filter(this::hasThumbnail)
+                .collect(Collectors.toList());
     }
 
 

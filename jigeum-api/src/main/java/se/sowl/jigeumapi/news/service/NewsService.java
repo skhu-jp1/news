@@ -68,8 +68,8 @@ public class NewsService {
 
     private List<String> convertToNewsItems(List<BingSearchResponse> searchResults) {
         return searchResults.stream()
-            .map(newsUtils::formatNewsItem)
-            .collect(Collectors.toList());
+                .map(newsUtils::formatNewsItem)
+                .collect(Collectors.toList());
     }
 
     private List<News> createProcessedNewsList(List<BingSearchResponse> searchResults, List<String> parsedResults) {
