@@ -9,6 +9,7 @@ import se.sowl.jigeumapi.gpt.GPTService;
 import se.sowl.jigeumdomain.news.domain.News;
 import se.sowl.jigeumdomain.news.repository.NewsRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +28,7 @@ public class NewsService {
         return newsRepository.findAll();
     }
 
+    // 매일 23:55에 실행될 메서드
     public void saveYesterdayNews() {
         List<BingSearchResponse> searchResults = bingSearchService.getYesterdayNews();
         log.info("{} 개의 뉴스를 조회했습니다.", searchResults.size());
@@ -48,6 +50,7 @@ public class NewsService {
         List<News> processedNews = new ArrayList<>();
         for (int i = 0; i < summariesAndTags.size(); i++) {
             String summaryAndTag = summariesAndTags.get(i);
+
             if (summaryAndTag != null && !summaryAndTag.isEmpty()) {
                 BingSearchResponse response = searchResults.get(i);
                 String[] parts = newsUtils.extractSummaryAndTag(summaryAndTag);
@@ -89,4 +92,9 @@ public class NewsService {
             processedNews.add(newsUtils.convertToNews(response, summaryAndTag[0], summaryAndTag[1]));
         }
     }
+    public List<News> getNewsByPublishedAt(LocalDateTime start, LocalDateTime end) {
+        return newsRepository.findByPublishedAtBetween(start, end);
+    }
+
+
 }

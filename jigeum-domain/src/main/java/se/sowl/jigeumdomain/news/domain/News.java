@@ -7,10 +7,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "news")
 public class News {
@@ -41,7 +49,6 @@ public class News {
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
-
 
     @Builder
     public News(String title, String content, String aiContent, String thumbnailUrl, String newsUrl, LocalDateTime publishedAt, String politicianPrediction) {
