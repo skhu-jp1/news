@@ -5,12 +5,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Moirai+One&display=swap" rel="stylesheet">
     <style>
-        /* 전체보기 버튼 중앙 정렬 */
-        #toggleAll {
+
+        .custom-font2 {
             display: block;
             margin: 0 auto 20px auto;
+            font-family: "Moirai One", system-ui;
+            font-size: 60px;
+            font-weight: 580;
+            font-style: normal;
         }
+
+        #calendar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .calendar-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .arrow {
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        #dates-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .date-button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid #000000;
+            border-radius: 50%;
+            font-size: 1rem;
+            color: #000000;
+            background-color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .date-button:hover {
+            background-color: #000000;
+            color: white;
+        }
+
+        .selected-date-button {
+            background-color: #000000;
+            color: white;
+        }
+        #days-of-week {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 5px; /* 날짜와 요일 간 간격 */
+
+            font-size: 0.9rem; /* 요일 폰트 크기 */
+
+            color: #6c757d;
+        }
+
+        #days-of-week span {
+            width: 45px; /* 날짜 버튼과 동일한 크기 */
+            text-align: center;
+            color: #6c757d;
+        }
+
+        #days-of-week span:nth-child(6) {
+            color: #0d6efd; /* 토요일 색상 */
+        }
+
+        #days-of-week span:nth-child(7) {
+            color: #dc3545; /* 일요일 색상 */
+        }
+
+        .controls-container {
+            display: flex; /* 가로 정렬 */
+            align-items: baseline; /* 수직 정렬 */
+            justify-content: center; /* 가로 정렬 */
+            gap: 10px; /* 버튼과 검색창 사이 간격 */
+            margin-bottom: 20px; /* 전체 컨테이너 아래 여백 */
+
+        }
+        /* 전체보기 버튼 */
+        #toggleAll {
+
+            width: auto; /* 텍스트 길이에 맞게 자동 조정 */
+            height: 40px; /* 검색창과 동일한 높이로 설정 */
+            padding: 5px 10px; /* 내부 여백 조정 */
+            font-size: 1rem; /* 폰트 크기 */
+            line-height: 1.2; /* 줄 간격 조정 */
+            border: 1px solid #ced4da; /* 검색창과 동일한 테두리 */
+            border-radius: 5px; /* 검색창과 동일한 둥글기 */
+            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+            transition: border-color 0.3s, box-shadow 0.3s; /* 클릭 시 효과 */
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+
+        }
+
+        .search-input {
+            width: 200px; /* 검색창 너비 */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #4e4e4e;
+            box-shadow: 0 0 5px rgba(44, 44, 44, 0.5);
+        }
+
+
         .row {
             display: flex; /* 카드 간 간격 유지 */
             flex-wrap: wrap;
@@ -31,6 +155,7 @@
             z-index: 1; /* 현재 카드 최상위로 표시 */
         }
         .news-thumbnail {
+            width: 100%; /* 카드 너비에 맞추기 */
             height: 200px;
             object-fit: cover;
             border-top-left-radius: 15px;
@@ -56,25 +181,17 @@
             transition: max-height 0.5s ease, opacity 0.5s ease;
         }
 
-        /* hover 시 카드 내용 표시 */
         .card-body-content {
             transition: max-height 0.5s ease, opacity 0.5s ease;
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-        }
-
-        /* 특정 카드 hover 시 해당 내용만 보이도록 설정 */
-        .news-card:hover .card-body-content {
             max-height: 1000px; /* 충분히 큰 값 */
             opacity: 1;
         }
-        /* 다른 카드 영향을 받지 않도록 */
-        .news-card:hover {
-            flex: 1 1 auto; /* 현재 카드의 크기만 늘어남 */
+
+        .news-card {
             margin-bottom: 20px; /* 다른 카드와 간격 유지 */
         }
-        /* 카드가 확장될 때 다른 카드 간격 유지 */
+
+        /* 카드 간격 유지 */
         .news-card:not(:hover) {
             transition: margin 0.5s ease;
         }
@@ -147,10 +264,38 @@
 </head>
 <body class="bg-light">
 <div class="container py-5">
-    <h1 class="mb-4 text-center">정치 동향 분석</h1>
-    <button id="toggleAll" class="btn btn-outline-secondary">전체 보기</button>
+    <div class="container py-5">
+        <!--<span class="mb-4 text-center custom-font1">EPL</span>-->
+        <span class="mb-4 text-center custom-font2">Easy Politics Lens</span>
+        <div class="controls-container">
+            <!--검색-->
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="키워드를 입력하세요" class="search-input">
+            </div>
+        </div>
+        <!-- 캘린더 -->
+        <div id="calendar" data-selected-date="${selectedDate}">
+            <div class="calendar-header">
+                <span id="prev-week" class="arrow">&larr;</span>
+                <span id="current-month">YYYY-MM</span>
+                <span id="next-week" class="arrow">&rarr;</span>
+            </div>
+            <div id="days-of-week">
+                <span>월</span>
+                <span>화</span>
+                <span>수</span>
+                <span>목</span>
+                <span>금</span>
+                <span>토</span>
+                <span>일</span>
+            </div>
+            <span id="dates-container"></span>
 
+        </div>
+    </div>
+    <!-- 뉴스 목록 -->
     <div class="row g-4">
+        <!-- 기본 뉴스 목록은 서버에서 초기 렌더링 -->
         <div th:each="news : ${newsList}" class="col-md-6 col-lg-4">
             <div class="card h-100 news-card">
                 <!-- 썸네일 -->
@@ -215,16 +360,16 @@
                 </div>
             </div>
         </div>
-        <!-- 예시
+        <!--여기서부터 예시뉴스카드
           <div class="col-md-6 col-lg-4">
               <div class="card h-100 news-card">
-                  <썸네일>
+
                   <img src="https://via.placeholder.com/300x200"
                        class="news-thumbnail"
                        alt="뉴스 썸네일">
 
                   <div class="card-body">
-                      <제목>
+
                       <h5 class="card-title mb-2">
                           <a href="https://example.com/news-detail"
                              class="text-decoration-none text-dark"
@@ -233,13 +378,13 @@
                           </a>
                       </h5>
 
-                      <발행일>
+
                       <p class="published-date mb-3">
                           2024-11-22 10:00
                       </p>
 
                       <div class="card-body-content">
-                      <AI 요약 섹션>
+
                       <div class="ai-summary">
                           <div class="icon-label">
                               <i class="bi bi-cpu text-success"></i>
@@ -250,7 +395,7 @@
                           </p>
                       </div>
 
-                      <정치인 동향 예측 섹션>
+
                       <div class="politician-prediction">
                           <div class="icon-label">
                               <i class="bi bi-graph-up text-primary"></i>
@@ -263,7 +408,7 @@
                       </div>
                   </div>
 
-                  <푸터 섹션>
+
                   <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-center">
                       <small class="text-muted">
                           <i class="bi bi-clock"></i>
@@ -277,7 +422,7 @@
                   </div>
               </div>
           </div>
-      </div> -->
+      </div>예시뉴스카드 끝-->
 
     </div>
 </div>
@@ -286,34 +431,132 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
     <script>
+
+        let currentWeekStart;
+        let selectedDate = null;
+
+        // 주 시작 날짜 계산 (월요일 기준)
+        function getWeekStart(date = new Date()) {
+            const dayOfWeek = date.getDay();
+            const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek; // 월요일 기준
+            const monday = new Date(date);
+            monday.setHours(0, 0, 0, 0); // 시간 초기화
+            monday.setDate(date.getDate() + diffToMonday);
+            return monday;
+        }
+
+        // 주간 날짜 생성
+        function generateWeekDates(startDate) {
+            const weekDates = [];
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(startDate);
+                date.setDate(startDate.getDate() + i);
+                weekDates.push(date);
+            }
+            return weekDates;
+        }
+
+        // 현재 URL에서 날짜 추출
+        function getSelectedDateFromURL() {
+            const urlParts = window.location.pathname.split('/');
+            const lastPart = urlParts[urlParts.length - 1];
+            return lastPart.match(/^\d{4}-\d{2}-\d{2}$/) ? lastPart : null; // YYYY-MM-DD 형식 검사
+        }
+
+        // 캘린더 렌더링
+        function renderCalendar() {
+            const datesContainer = document.getElementById('dates-container');
+            const currentMonth = document.getElementById('current-month');
+            const weekDates = generateWeekDates(currentWeekStart);
+            datesContainer.innerHTML = '';
+
+            // 현재 년도와 월 표시
+            currentMonth.textContent = `${currentWeekStart.getFullYear()}-${(currentWeekStart.getMonth() + 1)
+                .toString().padStart(2, '0')}`;
+
+            weekDates.forEach(date => {
+                const button = document.createElement('button');
+                button.className = 'date-button';
+                button.textContent = date.getDate(); // 날짜만 표시
+                button.dataset.date = date.toLocaleDateString('en-CA'); // YYYY-MM-DD (로컬 시간대 기준)
+
+                // 선택된 날짜 스타일 적용
+                if (button.dataset.date === selectedDate) {
+                    button.classList.add('selected-date-button');
+                }
+
+                // 날짜 클릭 이벤트
+                button.addEventListener('click', () => {
+                    selectedDate = button.dataset.date; // 선택한 날짜 설정
+
+                    // 모든 버튼에서 'selected-date-button' 제거 후 클릭된 버튼에 추가
+                  //  const allButtons = document.querySelectorAll('.date-button');
+                    //allButtons.forEach(btn => btn.classList.remove('selected-date-button'));
+                    button.classList.add('selected-date-button');
+
+                    // 캘린더 업데이트
+                    currentWeekStart = getWeekStart(new Date(selectedDate)); // 선택 날짜 기준으로 주 시작일 설정
+                    window.location.href = `/news/${selectedDate}`; // URL 이동
+                });
+
+                datesContainer.appendChild(button);
+            });
+        }
+
+        // 이전 주 이동
+        function showPreviousWeek() {
+            currentWeekStart.setDate(currentWeekStart.getDate() - 7);
+            renderCalendar();
+        }
+
+        // 다음 주 이동
+        function showNextWeek() {
+            currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+            renderCalendar();
+        }
+
+        // 초기 설정
+        document.addEventListener('DOMContentLoaded', () => {
+            const calendar = document.getElementById('calendar');
+            const today = new Date();
+
+            // 서버에서 전달된 selectedDate 읽기
+            selectedDate = getSelectedDateFromURL() || calendar.dataset.selectedDate || today.toISOString().split('T')[0];
+
+            // selectedDate가 유효하지 않을 경우 기본값으로 오늘 날짜를 설정
+            if (isNaN(new Date(selectedDate).getTime())) {
+                selectedDate = today.toISOString().split('T')[0];
+            }
+
+            currentWeekStart = getWeekStart(new Date(selectedDate)); // 선택된 날짜 기준으로 주 시작일 설정
+            renderCalendar();
+
+            // 화살표 이벤트 등록
+            document.getElementById('prev-week').addEventListener('click', showPreviousWeek);
+            document.getElementById('next-week').addEventListener('click', showNextWeek);
+        });
+
+
+        //검색기능
         document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("search-input");
+            const newsCards = document.querySelectorAll(".news-card");
 
-            const toggleAllBtn = document.getElementById("toggleAll");
-            const cards = document.querySelectorAll(".news-card");
-            let allExpanded = false;
+            searchInput.addEventListener("input", function () {
+                const query = searchInput.value.toLowerCase(); // 검색어 (소문자 변환)
 
-            // "전체 보기" 버튼 클릭 이벤트
-            toggleAllBtn.addEventListener("click", function () {
-                allExpanded = !allExpanded;
-                cards.forEach((card) => {
-                    if (allExpanded) {
-                        card.classList.add("expanded");
+                newsCards.forEach(card => {
+                    const title = card.querySelector(".card-title").textContent.toLowerCase();
+                    const content = card.querySelector(".content-preview").textContent.toLowerCase();
+
+                    // 검색어가 제목이나 내용에 포함되어 있는지 확인
+                    if (title.includes(query) || content.includes(query)) {
+                        card.style.display = "block"; // 일치하면 표시
                     } else {
-                        card.classList.remove("expanded");
+                        card.style.display = "none"; // 일치하지 않으면 숨김
                     }
                 });
-                toggleAllBtn.textContent = allExpanded ? "축소하기" : "전체 보기";
             });
-
-            // 카드 클릭 이벤트 (옵션)
-            cards.forEach((card) => {
-                card.addEventListener("click", function () {
-                    card.classList.toggle("expanded");
-                });
-            });
-
-
-
         });
     </script>
 
