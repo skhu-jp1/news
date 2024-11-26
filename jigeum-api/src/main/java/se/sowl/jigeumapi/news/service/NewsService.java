@@ -28,7 +28,6 @@ public class NewsService {
         return newsRepository.findAll();
     }
 
-    // 매일 23:55에 실행될 메서드
     public void saveYesterdayNews() {
         List<BingSearchResponse> searchResults = bingSearchService.getYesterdayNews();
         log.info("{} 개의 뉴스를 조회했습니다.", searchResults.size());

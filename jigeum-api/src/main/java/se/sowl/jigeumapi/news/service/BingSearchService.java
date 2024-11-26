@@ -13,7 +13,6 @@ import se.sowl.jigeumapi.dto.BingSearchResponse;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +25,7 @@ public class BingSearchService {
 
     public List<BingSearchResponse> getYesterdayNews() {
         HttpEntity<String> header = generateHttpHeader();
-        String searchUrl = "https://api.bing.microsoft.com/v7.0/news/search?q=정치&category=World_Asia&sortBy=Date&count=30&setLang=ko&mkt=ko-KR&freshness=Day";
+        String searchUrl = "https://api.bing.microsoft.com/v7.0/news/search?q=정치&sortBy=relevance&count=40&mkt=ko-KR";
         List<Map<String, Object>> newsItems = search(searchUrl, header);
 
 

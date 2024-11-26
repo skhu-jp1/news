@@ -489,8 +489,8 @@
                 button.addEventListener('click', () => {
                     selectedDate = button.dataset.date; // 선택한 날짜 설정
 
-                    // 모든 버튼에서 'selected-date-button' 제거 후 클릭된 버튼에 추가
-                  //  const allButtons = document.querySelectorAll('.date-button');
+                    //모든 버튼에서 'selected-date-button' 제거 후 클릭된 버튼에 추가
+                    //const allButtons = document.querySelectorAll('.date-button');
                     //allButtons.forEach(btn => btn.classList.remove('selected-date-button'));
                     button.classList.add('selected-date-button');
 
@@ -522,6 +522,9 @@
 
             // 서버에서 전달된 selectedDate 읽기
             selectedDate = getSelectedDateFromURL() || calendar.dataset.selectedDate || today.toISOString().split('T')[0];
+
+            const yesterday = new Date(today);
+            yesterday.setDate(today.getDate() - 1); // 어제 날짜 계산
 
             // selectedDate가 유효하지 않을 경우 기본값으로 오늘 날짜를 설정
             if (isNaN(new Date(selectedDate).getTime())) {
