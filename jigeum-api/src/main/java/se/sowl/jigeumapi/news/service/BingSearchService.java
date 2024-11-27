@@ -25,8 +25,9 @@ public class BingSearchService {
 
     public List<BingSearchResponse> getYesterdayNews() {
         HttpEntity<String> header = generateHttpHeader();
-        String searchUrl = "https://api.bing.microsoft.com/v7.0/news/search?q=정치&category=Politics&sortBy=Relevance&count=30&setLang=ko&mkt=ko-KR";
+        String searchUrl = "https://api.bing.microsoft.com/v7.0/news/search?q=정치&sortBy=relevance&count=40&mkt=ko-KR";
         List<Map<String, Object>> newsItems = search(searchUrl, header);
+
 
         // Bing API 응답 데이터 로깅
         log.info("Bing API 응답 뉴스 개수: {}", newsItems.size());
@@ -35,9 +36,9 @@ public class BingSearchService {
         }
 
         return newsItems.stream()
-            .map(BingSearchResponse::new)
-            .filter(this::hasThumbnail)
-            .collect(Collectors.toList());
+                .map(BingSearchResponse::new)
+                .filter(this::hasThumbnail)
+                .collect(Collectors.toList());
     }
 
 

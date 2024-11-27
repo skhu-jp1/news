@@ -86,8 +86,8 @@ public class GPTService {
 
         String userMessage = generateUserMessage(newsItems);
         return new Object[]{
-            Map.of("role", "system", "content", systemMessage),
-            Map.of("role", "user", "content", userMessage)
+                Map.of("role", "system", "content", systemMessage),
+                Map.of("role", "user", "content", userMessage)
         };
     }
 
