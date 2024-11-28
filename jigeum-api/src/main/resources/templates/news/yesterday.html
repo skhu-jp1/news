@@ -8,7 +8,164 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Moirai+One&display=swap" rel="stylesheet">
-    <style>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+	
+		html,
+		body {
+			height: 100%;
+			min-height: 100vh;
+			height: 100vh;
+			width: 100%;
+			overflow-y: scroll;
+			scroll-snap-type: y mandatory;
+			scroll-behavior: smooth;
+			-ms-overflow-style: none;
+			scrollbar-width: none;
+			font-family: "Nanum Gothic", sans-serif;
+			font-weight: 700;
+			font-style: normal;
+		}
+
+		body ::-webkit-scrollbar {
+			display: none;
+			/* 웹킷 브라우저에서 스크롤바 숨기기 */
+		}
+
+		#intro {
+			height: 100vh;
+			background: #343a40;
+			color: white;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			scroll-snap-align: start;
+		}
+
+		#intro h1 {
+			font-size: 6rem;
+		}
+
+		#intro a {
+			margin-top: 20px;
+			padding: 20px 30px;
+			font-size: 2rem;
+			background: #181818;
+			color: white;
+			border-radius: 5px;
+			text-decoration: none;
+			transition: background-color 0.3s;
+		}
+
+		#intro a:hover {
+			background-color: #080808;
+		}
+		
+		#main-content {
+			height: 100vh;
+			overflow-y: auto;
+			scroll-snap-align: start;
+		}
+
+		/* 로그인 버튼 */
+		.login-button {
+			background-color: #495057;
+			color: #FFFFFF;
+			border: 3px solid #ADB5BD;
+			border-radius: 15px;
+			padding: 0.4em 0.8em;
+			font-size: 30px;
+			font-weight: bold;
+			cursor: pointer;
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+			transition: all 0.3s ease;
+			min-width: 200px;
+			min-height: 50px;
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		.login-button:hover {
+			background-color: #6C757D;
+			color: #E9ECEF;
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+		}
+
+		/* 네비게이션 버튼 */
+		.nav-dots {
+			position: fixed;
+			top: 50%;
+			right: 20px;
+			transform: translateY(-50%);
+			z-index: 100;
+		}
+
+		.nav-dots a {
+			display: block;
+			width: 12px;
+			height: 12px;
+			margin-bottom: 10px;
+			background-color: #888;
+			border-radius: 50%;
+			transition: background-color 0.3s;
+		}
+
+		.nav-dots a.active {
+			background-color: #333;
+		}
+
+		.nav-dots a:hover {
+			background-color: #444;
+		}
+
+
+		section {
+			display: inline-block;
+		}
+
+		.text-animation {
+			color: #ffffff;
+			font-size: 100px;
+			overflow: hidden;
+			white-space: nowrap;
+			width: 0;
+			border-right: 0.5rem solid #ffffff;
+			animation: typing steps(20, end) 1s forwards, blink-caret 0.75s step-end 2s forwards;
+
+		}
+
+		@keyframes typing {
+			from {
+				width: 0
+			}
+
+			to {
+				width: 100%
+			}
+		}
+
+		@keyframes blink-caret {
+			0% {
+				border-color: #ffffff;
+			}
+
+			49% {
+				border-color: #ffffff;
+			}
+
+			50% {
+				border-color: transparent;
+			}
+
+			100% {
+				border-color: transparent;
+			}
+		}
 
         .custom-font2 {
             display: block;
@@ -263,104 +420,104 @@
     </style>
 </head>
 <body class="bg-light">
-<div class="container py-5">
-    <div class="container py-5">
-        <!--<span class="mb-4 text-center custom-font1">EPL</span>-->
-        <span class="mb-4 text-center custom-font2">Easy Politics Lens</span>
-        <div class="controls-container">
-            <!--검색-->
-            <div class="search-container">
-                <input type="text" id="search-input" placeholder="키워드를 입력하세요" class="search-input">
-            </div>
-        </div>
-        <!-- 캘린더 -->
-        <div id="calendar" data-selected-date="${selectedDate}">
-            <div class="calendar-header">
-                <span id="prev-week" class="arrow">&larr;</span>
-                <span id="current-month">YYYY-MM</span>
-                <span id="next-week" class="arrow">&rarr;</span>
-            </div>
-            <div id="days-of-week">
-                <span>월</span>
-                <span>화</span>
-                <span>수</span>
-                <span>목</span>
-                <span>금</span>
-                <span>토</span>
-                <span>일</span>
-            </div>
-            <span id="dates-container"></span>
+	<div id="intro" class="nav">
+		<section>
+			<h1 class="mb-4 text-center text-animation">1조 정치 뉴스 프로젝트</h1>
+		</section>
+			<button class="login-button" onclick="location.href='/'">로그인</button>
+	</div>
+	<div id="main-content" class="nav">
+		<div class="container py-5">
+			<div class="container py-5">
+				<!--<span class="mb-4 text-center custom-font1">EPL</span>-->
+				<span class="mb-4 text-center custom-font2">Easy Politics Lens</span>
+				<div class="controls-container">
+					<!--검색-->
+					<div class="search-container">
+						<input type="text" id="search-input" placeholder="키워드를 입력하세요" class="search-input">
+					</div>
+				</div>
+				<!-- 캘린더 -->
+				<div id="calendar" data-selected-date="${selectedDate}">
+					<div class="calendar-header">
+						<span id="prev-week" class="arrow">&larr;</span>
+						<span id="current-month">YYYY-MM</span>
+						<span id="next-week" class="arrow">&rarr;</span>
+					</div>
+					<div id="days-of-week">
+						<span>월</span>
+						<span>화</span>
+						<span>수</span>
+						<span>목</span>
+						<span>금</span>
+						<span>토</span>
+						<span>일</span>
+					</div>
+					<span id="dates-container"></span>
 
-        </div>
-    </div>
-    <!-- 뉴스 목록 -->
-    <div class="row g-4">
-        <!-- 기본 뉴스 목록은 서버에서 초기 렌더링 -->
-        <div th:each="news : ${newsList}" class="col-md-6 col-lg-4">
-            <div class="card h-100 news-card">
-                <!-- 썸네일 -->
-                <img th:if="${news.thumbnailUrl}"
-                     th:src="${news.thumbnailUrl}"
-                     class="news-thumbnail"
-                     alt="뉴스 썸네일">
+				</div>
+			</div>
+			<!-- 뉴스 목록 -->
+			<div class="row g-4">
+				<!-- 기본 뉴스 목록은 서버에서 초기 렌더링 -->
+				<div th:each="news : ${newsList}" class="col-md-6 col-lg-4">
+					<div class="card h-100 news-card">
+						<!-- 썸네일 -->
+						<img th:if="${news.thumbnailUrl}" th:src="${news.thumbnailUrl}" class="news-thumbnail"
+							alt="뉴스 썸네일">
 
-                <div class="card-body">
-                    <!-- 제목 -->
-                    <h5 class="card-title mb-2">
-                        <a th:href="${news.newsUrl}"
-                           class="text-decoration-none text-dark"
-                           target="_blank"
-                           th:text="${news.title}">뉴스 제목</a>
-                    </h5>
+						<div class="card-body">
+							<!-- 제목 -->
+							<h5 class="card-title mb-2">
+								<a th:href="${news.newsUrl}" class="text-decoration-none text-dark" target="_blank"
+									th:text="${news.title}">뉴스 제목</a>
+							</h5>
 
-                    <!-- 발행일 -->
-                    <p class="published-date mb-3"
-                       th:text="${#temporals.format(news.publishedAt, 'yyyy-MM-dd HH:mm')}">
-                        발행일
-                    </p>
+							<!-- 발행일 -->
+							<p class="published-date mb-3"
+								th:text="${#temporals.format(news.publishedAt, 'yyyy-MM-dd HH:mm')}">
+								발행일
+							</p>
 
-                    <div class="card-body-content">
-                        <!-- AI 요약 섹션 -->
-                        <div class="ai-summary">
-                            <div class="icon-label">
-                                <i class="bi bi-cpu text-success"></i>
-                                <span>AI 뉴스 요약</span>
-                            </div>
-                            <p class="content-preview"
-                               th:text="${news.aiContent}">
-                                AI 분석 내용
-                            </p>
-                        </div>
-                        <!-- 정치인 동향 예측 섹션 -->
-                        <div class="politician-prediction">
-                            <div class="icon-label">
-                                <i class="bi bi-graph-up text-primary"></i>
-                                <span>정치인 동향 예측</span>
-                            </div>
-                            <p class="content-preview"
-                               th:text="${news.politicianPrediction}">
-                                정치인 동향 분석 내용
-                            </p>
-                        </div>
+							<div class="card-body-content">
+								<!-- AI 요약 섹션 -->
+								<div class="ai-summary">
+									<div class="icon-label">
+										<i class="bi bi-cpu text-success"></i>
+										<span>AI 뉴스 요약</span>
+									</div>
+									<p class="content-preview" th:text="${news.aiContent}">
+										AI 분석 내용
+									</p>
+								</div>
+								<!-- 정치인 동향 예측 섹션 -->
+								<div class="politician-prediction">
+									<div class="icon-label">
+										<i class="bi bi-graph-up text-primary"></i>
+										<span>정치인 동향 예측</span>
+									</div>
+									<p class="content-preview" th:text="${news.politicianPrediction}">
+										정치인 동향 분석 내용
+									</p>
+								</div>
 
-                    </div>
-                </div>
+							</div>
+						</div>
 
-                <!-- 푸터 섹션 -->
-                <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-center">
-                    <small class="text-muted">
-                        <i class="bi bi-clock"></i>
-                        <span th:text="${#temporals.format(news.publishedAt, 'HH:mm')}">시간</span>
-                    </small>
-                    <a th:href="${news.newsUrl}"
-                       class="btn btn-outline-primary btn-sm"
-                       target="_blank">
-                        원문 보기 <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!--여기서부터 예시뉴스카드
+						<!-- 푸터 섹션 -->
+						<div
+							class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-center">
+							<small class="text-muted">
+								<i class="bi bi-clock"></i>
+								<span th:text="${#temporals.format(news.publishedAt, 'HH:mm')}">시간</span>
+							</small>
+							<a th:href="${news.newsUrl}" class="btn btn-outline-primary btn-sm" target="_blank">
+								원문 보기 <i class="bi bi-arrow-right"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!--여기서부터 예시뉴스카드
           <div class="col-md-6 col-lg-4">
               <div class="card h-100 news-card">
 
@@ -423,12 +580,59 @@
               </div>
           </div>
       </div>예시뉴스카드 끝-->
-
-    </div>
-</div>
+			</div>
+		</div>
+	</div>
+	<div class="nav-dots">
+		<a data-target="intro"></a>
+		<a data-target="main-content"></a>
+	</div>
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+<!-- nav-dots 구현 -->
+	<script>
+		// IntersectionObserver 설정
+		const observer = new IntersectionObserver((entries, observer) => {
+			entries.forEach(entry => {
+				const targetLink = document.querySelector(`.nav-dots a[data-target="${entry.target.id}"]`);
+
+				if (entry.isIntersecting) {
+					// 화면에 보이는 섹션에 해당하는 링크에 'active' 클래스 추가
+					document.querySelectorAll('.nav-dots a').forEach(link => link.classList.remove('active'));
+					targetLink.classList.add('active');
+				}
+			});
+		}, {
+			threshold: 0.5 // 50% 이상 보일 때 활성화
+		});
+
+		// 섹션을 observer로 등록
+		document.querySelectorAll('.nav').forEach(section => {
+			observer.observe(section);
+		});
+
+		// 클릭 이벤트: 클릭 시 해당 섹션으로 부드럽게 이동
+		document.querySelectorAll('.nav-dots a').forEach(link => {
+			link.addEventListener('click', (event) => {
+				event.preventDefault();
+				const targetId = link.getAttribute('data-target');
+				const targetSection = document.getElementById(targetId);
+
+				if (targetSection) {
+					targetSection.scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					});
+
+					// 클릭한 링크에 'active' 클래스 추가
+					document.querySelectorAll('.nav-dots a').forEach(a => a.classList.remove('active'));
+					link.classList.add('active');
+				}
+			});
+		});
+	</script>
 
     <script>
 
